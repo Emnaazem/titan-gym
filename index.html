@@ -226,7 +226,7 @@
         <h2>Essai gratuit</h2>
         <p class="lead-s" style="opacity:1">Remplis le formulaire, on te répond sur WhatsApp.</p>
         <p class="fs-5 mb-1">Avenue Habib Bourguiba, Nabeul</p>
-        <p class="fs-5 mb-1">Tél : 00 000 000</p>
+        <p class="fs-5 mb-1">Tél : +216 54 012 599</p>
         <p class="fs-5">Lun-Ven 6h-22h · Sam 8h-21h · Dim 9h-14h</p>
       </div>
       <div class="col-12 col-md-7">
@@ -288,11 +288,11 @@ function calcIMC() {
   out.innerHTML = '<span class="n">' + imc.toFixed(1) + '</span>' + cat;
 }
 
-/* ===== 3) الفورم يبني رابط واتساب ويفتحو (بدّل الرقم 216XXXXXXXX برقم حقيقي) ===== */
+/* ===== 3) الفورم يبني رابط واتساب ويفتحو (بدّل الرقم 21654012599 برقم حقيقي) ===== */
 function envoyer(form) {
   const texte = "Bonjour, je veux réserver un essai gratuit. Nom: " + form.nom.value +
                 " — Tél: " + form.tel.value + " — Objectif: " + form.objectif.value;
-  window.open('https://wa.me/216XXXXXXXX?text=' + encodeURIComponent(texte), '_blank');
+  window.open('https://wa.me/21654012599?text=' + encodeURIComponent(texte), '_blank');
 }
 </script>
 </body>
