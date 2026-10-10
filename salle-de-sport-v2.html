@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TITAN GYM | Salle de sport à Nabeul</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* الألوان: بدّلهم هنا والموقع كامل يتبدّل */
+  :root { --bleu:#1f3bff; --jaune:#ffd60a; --fond:#f5f5f0; --texte:#14182b; }
+  html { scroll-behavior:smooth; scroll-padding-top:70px; }
+  body { font-family:'Barlow',sans-serif; color:var(--texte); background:var(--fond); }
+  h1,h2,h3,.brand { font-family:'Anton',sans-serif; font-weight:400; line-height:1; }
+  section { padding:4.5rem 0; }
+  h2 { font-size:clamp(2.2rem,6vw,3.6rem); margin-bottom:.6rem; }
+  .lead-s { max-width:34rem; opacity:.8; margin-bottom:2.2rem; }
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--jaune); outline-offset:2px; }
+
+  /* الهيدر */
+  header.top { position:sticky; top:0; z-index:50; background:var(--fond); border-bottom:3px solid var(--texte); }
+  .brand { font-size:1.8rem; color:var(--texte); text-decoration:none; letter-spacing:1px; }
+  .nav-l a { color:var(--texte); text-decoration:none; font-weight:600; margin-left:1.5rem; }
+  .nav-l a:hover { text-decoration:underline; }
+
+  /* الأزرار */
+  .btn-cta { background:var(--jaune); color:var(--texte); font-weight:600; padding:.8rem 1.8rem; border-radius:0; border:3px solid var(--texte); }
+  .btn-cta:hover { background:#fff; color:var(--texte); }
+  .btn-sm-cta { padding:.4rem 1rem; }
+
+  /* HERO: العنوان الكبير هو العنصر القوي في الصفحة */
+  .hero { background:var(--bleu); color:#fff; padding:4.5rem 0 0; }
+  .hero h1 { font-size:clamp(4rem,16vw,11rem); text-transform:uppercase; letter-spacing:-1px; }
+  .hero p { font-size:1.25rem; max-width:32rem; }
+  .stats { display:flex; flex-wrap:wrap; margin-top:3.5rem; border-top:2px solid rgba(255,255,255,.4); }
+  .stats div { flex:1 1 50%; padding:1.2rem 0; }
+  @media(min-width:768px){ .stats div { flex:1; } }
+  .stats b { font-family:'Anton',sans-serif; font-weight:400; font-size:2.6rem; color:var(--jaune); display:block; }
+
+  /* الكورس */
+  .cours { background:#fff; border:3px solid var(--texte); padding:1.6rem; height:100%; transition:transform .15s; }
+  .cours:hover { transform:translateY(-4px); background:var(--jaune); }
+  .cours .ic { font-size:2.2rem; }
+  .cours h3 { font-size:1.7rem; margin:.5rem 0; }
+  .niveau { display:inline-block; border:2px solid var(--texte); padding:0 .6rem; font-size:.85rem; font-weight:600; }
+
+  /* البرنامج الأسبوعي */
+  .planning { background:var(--texte); color:#fff; }
+  .tabs { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.5rem; }
+  .tabs button { background:transparent; color:#fff; border:2px solid #fff; padding:.4rem 1.1rem; font-weight:600; }
+  .tabs button.on { background:var(--jaune); color:var(--texte); border-color:var(--jaune); }
+  .slot { display:flex; gap:1.2rem; padding:.9rem 0; border-bottom:1px solid rgba(255,255,255,.3); font-size:1.15rem; }
+  .slot .h { font-family:'Anton',sans-serif; font-size:1.5rem; color:var(--jaune); min-width:5rem; }
+  .slot .c { margin-left:auto; opacity:.7; text-align:right; }
+
+  /* حاسبة IMC */
+  .imc { background:var(--jaune); border-top:3px solid var(--texte); border-bottom:3px solid var(--texte); }
+  .imc input { border:3px solid var(--texte); border-radius:0; padding:.7rem; width:100%; font-size:1.1rem; background:#fff; }
+  #imcOut { font-size:1.3rem; font-weight:600; min-height:3.5rem; margin-top:1rem; }
+  #imcOut .n { font-family:'Anton',sans-serif; font-size:3.2rem; display:block; line-height:1; }
+
+  /* المدربين */
+  .coach { border:3px solid var(--texte); background:#fff; height:100%; }
+  .coach .photo { background:var(--bleu); color:var(--jaune); font-family:'Anton',sans-serif; font-size:5rem; text-align:center; padding:1.2rem 0; }
+  .coach .txt { padding:1.2rem 1.4rem; }
+  .coach h3 { font-size:1.6rem; }
+
+  /* الأسعار */
+  .plan { background:#fff; border:3px solid var(--texte); padding:1.8rem; height:100%; }
+  .plan.vedette { background:var(--jaune); }
+  .plan .prix { font-family:'Anton',sans-serif; font-size:3.6rem; }
+  .plan ul { padding-left:1.1rem; margin:1rem 0 0; }
+
+  /* آراء */
+  .avis { background:var(--bleu); color:#fff; }
+  .avis blockquote { font-size:1.25rem; border-left:5px solid var(--jaune); padding-left:1rem; margin:0; }
+  .avis small { opacity:.75; display:block; margin-top:.6rem; }
+
+  /* FAQ */
+  .accordion-item { border:3px solid var(--texte); border-radius:0 !important; margin-bottom:.7rem; }
+  .accordion-button { font-weight:600; font-size:1.1rem; border-radius:0 !important; background:#fff; color:var(--texte); }
+  .accordion-button:not(.collapsed) { background:var(--jaune); color:var(--texte); box-shadow:none; }
+
+  /* الفورم */
+  .contact { background:var(--texte); color:#fff; }
+  .contact input,.contact select,.contact textarea { width:100%; border:3px solid var(--jaune); border-radius:0; padding:.75rem; margin-bottom:.8rem; background:#fff; font-size:1rem; }
+  footer { padding:1.5rem 0; font-size:.9rem; }
+</style>
+</head>
+
+<body>
+
+<!-- ===== الهيدر ===== -->
+<header class="top">
+  <div class="container d-flex align-items-center justify-content-between py-2">
+    <a class="brand" href="#">TITAN GYM</a>
+    <!-- d-none d-md-block = يتخبا في التليفون ويظهر في الكمبيوتر -->
+    <nav class="nav-l d-none d-md-block">
+      <a href="#cours">Cours</a><a href="#planning">Planning</a><a href="#tarifs">Tarifs</a><a href="#faq">FAQ</a>
+    </nav>
+    <a href="#contact" class="btn btn-cta btn-sm-cta">Essai gratuit</a>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="container">
+    <h1>Bouge.<br>Tiens bon.</h1>
+    <p class="mt-4">Salle de sport à Nabeul. Coachs diplômés, machines récentes, ouvert 7j/7. Première séance offerte.</p>
+    <a href="#contact" class="btn btn-cta mt-2">Réserver mon essai gratuit</a>
+    <div class="stats">
+      <div><b>1200 m²</b>d'espace d'entraînement</div>
+      <div><b>12</b>coachs diplômés</div>
+      <div><b>40</b>cours par semaine</div>
+      <div><b>7j/7</b>de 6h à 22h</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== الكورس ===== -->
+<section id="cours">
+  <div class="container">
+    <h2>Nos cours</h2>
+    <p class="lead-s">Du débutant au confirmé, il y a un cours pour toi. Tous les cours sont inclus dans l'abonnement.</p>
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-4"><div class="cours"><div class="ic">🏋️</div><h3>Musculation</h3><p>Espace libre avec haltères, barres et machines guidées.</p><span class="niveau">Tous niveaux</span></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="cours"><div class="ic">🔥</div><h3>HIIT</h3><p>Séances courtes et intenses pour brûler un maximum en 30 minutes.</p><span class="niveau">Intermédiaire</span></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="cours"><div class="ic">🥊</div><h3>Boxe</h3><p>Technique, cardio et défoulement avec sac et pattes d'ours.</p><span class="niveau">Tous niveaux</span></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="cours"><div class="ic">🧘</div><h3>Yoga</h3><p>Souplesse, respiration et récupération après les séances lourdes.</p><span class="niveau">Débutant</span></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="cours"><div class="ic">💃</div><h3>Zumba</h3><p>Du cardio en musique, ambiance garantie.</p><span class="niveau">Débutant</span></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="cours"><div class="ic">🏃</div><h3>Cardio</h3><p>Tapis, vélos et rameurs avec un programme adapté à ton objectif.</p><span class="niveau">Tous niveaux</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== البرنامج (الأزرار والصفوف يتعملوا بالـ JavaScript تحت) ===== -->
+<section class="planning" id="planning">
+  <div class="container">
+    <h2>Planning de la semaine</h2>
+    <p class="lead-s">Choisis un jour pour voir les cours.</p>
+    <div class="tabs" id="tabs"></div>
+    <div id="slots"></div>
+  </div>
+</section>
+
+<!-- ===== حاسبة IMC ===== -->
+<section class="imc" id="imc">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-12 col-md-6">
+        <h2>Calcule ton IMC</h2>
+        <p>Indice de masse corporelle : un repère simple pour démarrer. Il ne remplace pas l'avis d'un médecin.</p>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="row g-3">
+          <div class="col-6"><label for="poids" class="fw-semibold">Poids (kg)</label><input id="poids" type="number" inputmode="decimal" placeholder="70"></div>
+          <div class="col-6"><label for="taille" class="fw-semibold">Taille (cm)</label><input id="taille" type="number" inputmode="decimal" placeholder="175"></div>
+        </div>
+        <button class="btn btn-cta mt-3" onclick="calcIMC()">Calculer</button>
+        <div id="imcOut" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== المدربين ===== -->
+<section id="coachs">
+  <div class="container">
+    <h2>Nos coachs</h2>
+    <p class="lead-s">Une équipe diplômée qui te suit de ta première séance à ton objectif.</p>
+    <div class="row g-4">
+      <div class="col-12 col-md-4"><div class="coach"><div class="photo">S</div><div class="txt"><h3>Coach Sami</h3><p class="mb-1 fw-semibold">Musculation et prise de masse</p><p class="mb-0">10 ans d'expérience. Programmes sur mesure.</p></div></div></div>
+      <div class="col-12 col-md-4"><div class="coach"><div class="photo">R</div><div class="txt"><h3>Coach Rania</h3><p class="mb-1 fw-semibold">Yoga, Zumba et remise en forme</p><p class="mb-0">Cours collectifs pleins d'énergie.</p></div></div></div>
+      <div class="col-12 col-md-4"><div class="coach"><div class="photo">Y</div><div class="txt"><h3>Coach Yassine</h3><p class="mb-1 fw-semibold">Boxe et HIIT</p><p class="mb-0">Ancien boxeur, spécialiste de la perte de poids.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الأسعار ===== -->
+<section id="tarifs" style="padding-top:0">
+  <div class="container">
+    <h2>Tarifs</h2>
+    <p class="lead-s">Sans engagement caché. Tarif étudiant : -20% sur présentation de la carte.</p>
+    <div class="row g-4">
+      <div class="col-12 col-md-4"><div class="plan"><h3>Mensuel</h3><div class="prix">60 DT</div><ul><li>Accès libre à la salle</li><li>Tous les cours collectifs</li><li>Vestiaires et douches</li></ul></div></div>
+      <div class="col-12 col-md-4"><div class="plan vedette"><h3>Trimestriel</h3><div class="prix">150 DT</div><ul><li>Tout le mensuel</li><li>1 séance avec un coach</li><li>Un mois offert</li></ul></div></div>
+      <div class="col-12 col-md-4"><div class="plan"><h3>Annuel</h3><div class="prix">500 DT</div><ul><li>Tout le trimestriel</li><li>Programme personnalisé</li><li>Bilan tous les 3 mois</li></ul></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== آراء ===== -->
+<section class="avis">
+  <div class="container">
+    <h2>Ils ont tenu bon</h2>
+    <div class="row g-4 mt-2">
+      <div class="col-12 col-md-4"><blockquote>J'ai perdu 12 kilos en 5 mois grâce au suivi de Coach Sami.<small>Mehdi, membre depuis 2025</small></blockquote></div>
+      <div class="col-12 col-md-4"><blockquote>Les cours de Zumba sont devenus mon moment préféré de la semaine.<small>Ines, membre depuis 2024</small></blockquote></div>
+      <div class="col-12 col-md-4"><blockquote>Salle propre, matériel neuf et horaires larges. Parfait avec mon travail.<small>Hamza, membre depuis 2026</small></blockquote></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ (Bootstrap accordion) ===== -->
+<section id="faq">
+  <div class="container">
+    <h2>Questions fréquentes</h2>
+    <div class="accordion mt-4" id="faqList">
+      <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q1">Je suis débutant, par où commencer ?</button></h3>
+        <div id="q1" class="accordion-collapse collapse" data-bs-parent="#faqList"><div class="accordion-body">Réserve ta séance d'essai gratuite. Un coach te fait visiter la salle et te propose un programme de départ.</div></div></div>
+      <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q2">Faut-il réserver les cours collectifs ?</button></h3>
+        <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqList"><div class="accordion-body">Oui, par WhatsApp ou à l'accueil, car les places sont limitées à 20 personnes par cours.</div></div></div>
+      <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q3">Y a-t-il un espace séparé pour les femmes ?</button></h3>
+        <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqList"><div class="accordion-body">Des créneaux réservés aux femmes sont prévus chaque semaine. Demande le planning à l'accueil.</div></div></div>
+      <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q4">Puis-je suspendre mon abonnement ?</button></h3>
+        <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqList"><div class="accordion-body">Oui, jusqu'à 15 jours par trimestre en cas de voyage ou de maladie.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== التواصل ===== -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-12 col-md-5">
+        <h2>Essai gratuit</h2>
+        <p class="lead-s" style="opacity:1">Remplis le formulaire, on te répond sur WhatsApp.</p>
+        <p class="fs-5 mb-1">Avenue Habib Bourguiba, Nabeul</p>
+        <p class="fs-5 mb-1">Tél : 00 000 000</p>
+        <p class="fs-5">Lun-Ven 6h-22h · Sam 8h-21h · Dim 9h-14h</p>
+      </div>
+      <div class="col-12 col-md-7">
+        <form onsubmit="event.preventDefault(); envoyer(this);">
+          <input name="nom" placeholder="Ton nom" required>
+          <input name="tel" type="tel" placeholder="Ton numéro" required>
+          <select name="objectif" aria-label="Objectif">
+            <option>Perdre du poids</option><option>Prendre de la masse</option>
+            <option>Me remettre en forme</option><option>Cours collectifs</option>
+          </select>
+          <button type="submit" class="btn btn-cta">Envoyer sur WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="container">TITAN GYM &copy; 2026 · Site de démonstration, noms et prix fictifs</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ===== 1) البرنامج الأسبوعي: عدّل الساعات والكورس والمدرب هنا ===== */
+const planning = {
+  Lun: [['07:00','Musculation','Coach Sami'],['12:30','HIIT','Coach Yassine'],['18:30','Zumba','Coach Rania']],
+  Mar: [['07:00','Cardio','Coach Sami'],['18:00','Boxe','Coach Yassine'],['19:30','Yoga','Coach Rania']],
+  Mer: [['07:00','HIIT','Coach Yassine'],['12:30','Musculation','Coach Sami'],['18:30','Zumba','Coach Rania']],
+  Jeu: [['07:00','Musculation','Coach Sami'],['18:00','Boxe','Coach Yassine'],['19:30','Yoga','Coach Rania']],
+  Ven: [['07:00','Cardio','Coach Sami'],['17:30','HIIT','Coach Yassine'],['19:00','Zumba','Coach Rania']],
+  Sam: [['09:00','Boxe','Coach Yassine'],['10:30','Zumba','Coach Rania'],['16:00','Musculation','Coach Sami']],
+  Dim: [['10:00','Yoga','Coach Rania'],['11:30','HIIT','Coach Yassine']]
+};
+
+// تعمل أزرار الأيام (Lun, Mar...) وتعرض الكورس متاع اليوم المختار
+function afficherJour(jour) {
+  document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.textContent === jour));
+  document.getElementById('slots').innerHTML = planning[jour].map(s =>
+    '<div class="slot"><span class="h">' + s[0] + '</span><span>' + s[1] + '</span><span class="c">' + s[2] + '</span></div>'
+  ).join('');
+}
+Object.keys(planning).forEach(jour => {
+  const b = document.createElement('button');
+  b.textContent = jour;
+  b.onclick = () => afficherJour(jour);
+  document.getElementById('tabs').appendChild(b);
+});
+afficherJour('Lun'); // اليوم اللي يظهر في البداية
+
+/* ===== 2) حاسبة IMC: الوزن ÷ (الطول بالمتر)² ===== */
+function calcIMC() {
+  const poids = parseFloat(document.getElementById('poids').value);
+  const taille = parseFloat(document.getElementById('taille').value) / 100; // من cm إلى m
+  const out = document.getElementById('imcOut');
+  if (!poids || !taille || poids <= 0 || taille <= 0) { out.textContent = 'Entre ton poids et ta taille.'; return; }
+  const imc = poids / (taille * taille);
+  let cat = 'Poids normal';
+  if (imc < 18.5) cat = 'Insuffisance pondérale';
+  else if (imc >= 30) cat = 'Obésité';
+  else if (imc >= 25) cat = 'Surpoids';
+  out.innerHTML = '<span class="n">' + imc.toFixed(1) + '</span>' + cat;
+}
+
+/* ===== 3) الفورم يبني رابط واتساب ويفتحو (بدّل الرقم 216XXXXXXXX برقم حقيقي) ===== */
+function envoyer(form) {
+  const texte = "Bonjour, je veux réserver un essai gratuit. Nom: " + form.nom.value +
+                " — Tél: " + form.tel.value + " — Objectif: " + form.objectif.value;
+  window.open('https://wa.me/216XXXXXXXX?text=' + encodeURIComponent(texte), '_blank');
+}
+</script>
+</body>
+</html>
